@@ -15,13 +15,6 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL ||
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 
   (typeof window !== 'undefined' && (window as any).ENV_SUPABASE_ANON_KEY);
 
-// Add debug logging for deployment troubleshooting
-console.log('Supabase configuration:', {
-  url: supabaseUrl,
-  // Only show first 10 chars of key for security
-  key: supabaseAnonKey ? `${supabaseAnonKey.substring(0, 10)}...` : 'missing'
-});
-
 if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables. Please click "Connect to Supabase" to set up your project.');
 }

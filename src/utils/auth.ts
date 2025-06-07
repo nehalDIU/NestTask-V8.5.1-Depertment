@@ -6,7 +6,11 @@ import { supabase } from '../lib/supabase';
  * Forces a clean reload of the application after login
  * This helps ensure PWA cache is refreshed for authenticated views
  */
+<<<<<<< HEAD
+export function forceCleanReload(skipReload = false): void {
+=======
 export function forceCleanReload(): void {
+>>>>>>> 16054106497c7ccbc779b48116789df5627baf42
   // Check if we're on a super admin page
   const isSuperAdmin = window.location.pathname.includes('super-admin') || 
                        sessionStorage.getItem('is_super_admin') === 'true' ||
@@ -52,17 +56,35 @@ export function forceCleanReload(): void {
     // Listen for response from service worker
     navigator.serviceWorker.addEventListener('message', (event) => {
       if (event.data && event.data.type === 'CACHES_CLEARED') {
+<<<<<<< HEAD
+        console.log('Service worker cleared caches');
+        if (!skipReload) {
+          console.log('Reloading page after cache clear');
+          window.location.reload();
+        }
+=======
         console.log('Service worker cleared caches, reloading page');
         window.location.reload();
+>>>>>>> 16054106497c7ccbc779b48116789df5627baf42
       }
     }, { once: true }); // Only listen once
     
     // Fallback reload in case service worker doesn't respond
+<<<<<<< HEAD
+    if (!skipReload) {
+      setTimeout(() => {
+        console.log('Forcing page reload after timeout');
+        window.location.reload();
+      }, 1000);
+    }
+  } else if (!skipReload) {
+=======
     setTimeout(() => {
       console.log('Forcing page reload after timeout');
       window.location.reload();
     }, 1000);
   } else {
+>>>>>>> 16054106497c7ccbc779b48116789df5627baf42
     // If no service worker, just reload the page
     window.location.reload();
   }
